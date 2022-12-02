@@ -29,6 +29,9 @@ internal class Program
             case "d1":
                 Solutions.DayOne.ExecuteSoultions(challengeOption, inputFileName);
                 break;
+            case "d2":
+                Solutions.DayTwo.ExecuteSoultions(challengeOption, inputFileName);
+                break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(dayOption), $"Unexpected day option: {dayOption}");
         }

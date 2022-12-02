@@ -37,8 +37,8 @@ internal class Program
     /// <returns>THe filename to use in the solution execution</returns>
     private static string SelectedInputFileName(string inputFileOption) => inputFileOption switch
     {
-        "a" => "input-1.text",
-        "b" => "input-2.text",
+        "a" => "input-1.txt",
+        "b" => "input-2.txt",
         "c" => "input-3.txt",
         _ => throw new ArgumentOutOfRangeException(nameof(inputFileOption), $"Unexpected input file option: {inputFileOption}")
     };

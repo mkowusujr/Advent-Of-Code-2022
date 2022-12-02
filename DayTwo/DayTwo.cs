@@ -59,9 +59,11 @@ public static class DayTwo
         {
             return (int)GameOutcomes.Tie + (int)yourMove;
         }
-        else if ((opponentsMove == EncryptedMove.A && yourMove == EncryptedMove.Y) ||
-                (opponentsMove == EncryptedMove.B && yourMove == EncryptedMove.Z) ||
-                (opponentsMove == EncryptedMove.C && yourMove == EncryptedMove.X))
+        else if (
+            (opponentsMove == EncryptedMove.A && yourMove == EncryptedMove.Y)
+            || (opponentsMove == EncryptedMove.B && yourMove == EncryptedMove.Z)
+            || (opponentsMove == EncryptedMove.C && yourMove == EncryptedMove.X)
+        )
         {
             return (int)GameOutcomes.Win + (int)yourMove;
         }
@@ -100,7 +102,9 @@ public static class DayTwo
         }
     }
 
-    private static (EncryptedMove, EncryptedMove) TurnPlayerInputsToEncryptedMoveEnum(string[] playerInputs)
+    private static (EncryptedMove, EncryptedMove) TurnPlayerInputsToEncryptedMoveEnum(
+        string[] playerInputs
+    )
     {
         EncryptedMove opponentsMove;
         EncryptedMove yourMove;
@@ -110,7 +114,9 @@ public static class DayTwo
         return (opponentsMove, yourMove);
     }
 
-    private static (EncryptedMove, DecryptedMove) TurnPlayerInputsToStrategyTwoEnumPair(string[] playerInputs)
+    private static (EncryptedMove, DecryptedMove) TurnPlayerInputsToStrategyTwoEnumPair(
+        string[] playerInputs
+    )
     {
         EncryptedMove opponentsMove;
         DecryptedMove gameOutcome;
@@ -130,12 +136,14 @@ public static class DayTwo
 
             if (gameStrategy == 1)
             {
-                (EncryptedMove opponentsMove, EncryptedMove yourMove) = TurnPlayerInputsToEncryptedMoveEnum(inputs);
+                (EncryptedMove opponentsMove, EncryptedMove yourMove) =
+                    TurnPlayerInputsToEncryptedMoveEnum(inputs);
                 totalGameScore += PlayRoundStrategyOne(opponentsMove, yourMove);
             }
             else
             {
-                (EncryptedMove opponentsMove, DecryptedMove gameOutcome) = TurnPlayerInputsToStrategyTwoEnumPair(inputs);
+                (EncryptedMove opponentsMove, DecryptedMove gameOutcome) =
+                    TurnPlayerInputsToStrategyTwoEnumPair(inputs);
                 totalGameScore += PlayRoundStrategyTwo(opponentsMove, gameOutcome);
             }
         }

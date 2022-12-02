@@ -19,7 +19,9 @@ public static class DayOne
                 break;
             default:
                 (int elfPostion, int elfsCalories) = FindElvesWithTheMostCalories(filePath)[0];
-                Console.WriteLine($"The elf with the most calories is #{elfPostion}, and they had {elfsCalories} calories");
+                Console.WriteLine(
+                    $"The elf with the most calories is #{elfPostion}, and they had {elfsCalories} calories"
+                );
                 break;
         }
     }
@@ -41,7 +43,10 @@ public static class DayOne
         {
             if (line.Equals(""))
             {
-                largestKeyValuePairs = SetLargestKeyValuePairs(largestKeyValuePairs, (currentElf, elvesAndTheirCalories[currentElf]));
+                largestKeyValuePairs = SetLargestKeyValuePairs(
+                    largestKeyValuePairs,
+                    (currentElf, elvesAndTheirCalories[currentElf])
+                );
 
                 currentElf++;
                 elvesAndTheirCalories.Add(currentElf, 0);
@@ -56,7 +61,10 @@ public static class DayOne
         return largestKeyValuePairs;
     }
 
-    private static List<(int, int)> SetLargestKeyValuePairs(List<(int, int)> largestKeyValuePairs, (int, int) newKeyValuePair)
+    private static List<(int, int)> SetLargestKeyValuePairs(
+        List<(int, int)> largestKeyValuePairs,
+        (int, int) newKeyValuePair
+    )
     {
         if (newKeyValuePair.Item2 > largestKeyValuePairs[0].Item2)
         {
@@ -77,7 +85,8 @@ public static class DayOne
         return largestKeyValuePairs;
     }
 
-    private static int GetSumOfTopThreeBiggestCalorieCounts(List<(int, int)> largestKeyValuePairs){
+    private static int GetSumOfTopThreeBiggestCalorieCounts(List<(int, int)> largestKeyValuePairs)
+    {
         return largestKeyValuePairs.Select(kvp => kvp.Item2).Sum();
     }
 }

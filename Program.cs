@@ -7,10 +7,14 @@ internal class Program
     static void Main()
     {
         string dayOption = Environment.GetCommandLineArgs()[1];
-        string inputFileOption = Environment.GetCommandLineArgs()[2];
+        string challengeOption = Environment.GetCommandLineArgs()[2];
+        string inputFileOption = Environment.GetCommandLineArgs().Length == 3 ?    
+            Environment.GetCommandLineArgs()[2] 
+            : 
+            Environment.GetCommandLineArgs()[3];
 
         string inputFileName = SelectedInputFileName(inputFileOption);
-        ExecuteSolutionsForSpecifiedDay(dayOption, inputFileName);
+        ExecuteSolutionsForSpecifiedDay(dayOption, challengeOption, inputFileName);
     }
 
     /// <summary>
@@ -18,12 +22,12 @@ internal class Program
     /// </summary>
     /// <param name="dayOption">The day to run the solution for. Ex: "d1"</param>
     /// <param name="inputFileName">The name of the input file</param>
-    private static void ExecuteSolutionsForSpecifiedDay(string dayOption, string inputFileName) {
-        dayOption = dayOption.ToLower();
-
-        switch(dayOption) {
+    private static void ExecuteSolutionsForSpecifiedDay(string dayOption, string challengeOption, string inputFileName)
+    {
+        switch (dayOption)
+        {
             case "d1":
-                Solutions.DayOne.ExecuteSoultionOne(inputFileName);
+                Solutions.DayOne.ExecuteSoultions(challengeOption, inputFileName);
                 break;
             default:
                 throw new ArgumentOutOfRangeException(nameof(dayOption), $"Unexpected day option: {dayOption}");
@@ -37,9 +41,9 @@ internal class Program
     /// <returns>THe filename to use in the solution execution</returns>
     private static string SelectedInputFileName(string inputFileOption) => inputFileOption switch
     {
-        "a" => "input-1.txt",
-        "b" => "input-2.txt",
-        "c" => "input-3.txt",
+        "i1" => "input-1.txt",
+        "i2" => "input-2.txt",
+        "i3" => "input-3.txt",
         _ => throw new ArgumentOutOfRangeException(nameof(inputFileOption), $"Unexpected input file option: {inputFileOption}")
     };
 }

@@ -3,15 +3,23 @@ namespace AdventOfCode2022.Solutions;
 public static class DayOne {
     static string SolutionDirectory = Path.Combine(Directory.GetCurrentDirectory(), "DayOne");
 
-    public static void ExecuteSoultionOne(string inputFileName){
+    public static void ExecuteSoultions(string challengeOption, string inputFileName){
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
         var elvesAndTheirCalories = new Dictionary<int, int>();
         elvesAndTheirCalories.Add(1, 0);
 
-        (int elfPostion, int elfsCalories) = FindElfWithTheMostCalories(filePath);
-
-        Console.WriteLine($"The elf with the most calories is #{elfPostion}, and they had {elfsCalories} calories");
+        switch(challengeOption){
+            case "c2":
+                Console.WriteLine();
+                break;
+            default:
+                (int elfPostion, int elfsCalories) = FindElfWithTheMostCalories(filePath);
+                Console.WriteLine($"The elf with the most calories is #{elfPostion}, and they had {elfsCalories} calories");
+                break;
+        }
     }
+
+
 
     private static (int, int) FindElfWithTheMostCalories(string fileName) {
         var largestKeyValuePair = (0, 0);

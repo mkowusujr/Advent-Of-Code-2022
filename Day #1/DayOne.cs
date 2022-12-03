@@ -2,7 +2,7 @@ namespace AdventOfCode2022.Solutions;
 
 public static class DayOne
 {
-    static string SolutionDirectory = Path.Combine(Directory.GetCurrentDirectory(), "DayOne");
+    static string SolutionDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Day #1");
 
     public static void ExecuteSoultions(string challengeOption, string inputFileName)
     {

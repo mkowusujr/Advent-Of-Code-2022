@@ -1,8 +1,9 @@
 namespace AdventOfCode2022.Solutions;
+using AdventOfCode2022.Utils.ExtentionMethods;
 
 public static class DayTwo
 {
-    static string SolutionDirectory = Path.Combine(Directory.GetCurrentDirectory(), "DayTwo");
+    static string SolutionDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Day #2");
 
     public static void ExecuteSoultions(string challengeOption, string inputFileName)
     {
@@ -20,37 +21,6 @@ public static class DayTwo
                 Console.WriteLine($"My total score would be {totalGameScore}");
                 break;
         }
-    }
-
-    enum HandShape
-    {
-        Rock = 1,
-        Paper = 2,
-        Scissors = 3
-    }
-
-    enum EncryptedMove
-    {
-        A = HandShape.Rock,
-        B = HandShape.Paper,
-        C = HandShape.Scissors,
-        X = HandShape.Rock,
-        Y = HandShape.Paper,
-        Z = HandShape.Scissors,
-    }
-
-    enum GameOutcomes
-    {
-        Loss = 0,
-        Tie = 3,
-        Win = 6
-    }
-
-    enum DecryptedMove
-    {
-        X = GameOutcomes.Loss,
-        Y = GameOutcomes.Tie,
-        Z = GameOutcomes.Win
     }
 
     private static int PlayRoundStrategyOne(EncryptedMove opponentsMove, EncryptedMove yourMove)
@@ -102,30 +72,6 @@ public static class DayTwo
         }
     }
 
-    private static (EncryptedMove, EncryptedMove) TurnPlayerInputsToEncryptedMoveEnum(
-        string[] playerInputs
-    )
-    {
-        EncryptedMove opponentsMove;
-        EncryptedMove yourMove;
-
-        Enum.TryParse<EncryptedMove>(playerInputs[0], out opponentsMove);
-        Enum.TryParse<EncryptedMove>(playerInputs[1], out yourMove);
-        return (opponentsMove, yourMove);
-    }
-
-    private static (EncryptedMove, DecryptedMove) TurnPlayerInputsToStrategyTwoEnumPair(
-        string[] playerInputs
-    )
-    {
-        EncryptedMove opponentsMove;
-        DecryptedMove gameOutcome;
-
-        Enum.TryParse<EncryptedMove>(playerInputs[0], out opponentsMove);
-        Enum.TryParse<DecryptedMove>(playerInputs[1], out gameOutcome);
-        return (opponentsMove, gameOutcome);
-    }
-
     private static int ParseInputFile(string fileName, int gameStrategy)
     {
         int totalGameScore = 0;
@@ -136,14 +82,14 @@ public static class DayTwo
 
             if (gameStrategy == 1)
             {
-                (EncryptedMove opponentsMove, EncryptedMove yourMove) =
-                    TurnPlayerInputsToEncryptedMoveEnum(inputs);
+                EncryptedMove opponentsMove = inputs[0].ToEnum<EncryptedMove>();
+                EncryptedMove yourMove = inputs[1].ToEnum<EncryptedMove>();
                 totalGameScore += PlayRoundStrategyOne(opponentsMove, yourMove);
             }
             else
             {
-                (EncryptedMove opponentsMove, DecryptedMove gameOutcome) =
-                    TurnPlayerInputsToStrategyTwoEnumPair(inputs);
+                EncryptedMove opponentsMove = inputs[0].ToEnum<EncryptedMove>();
+                DecryptedMove gameOutcome = inputs[1].ToEnum<DecryptedMove>();
                 totalGameScore += PlayRoundStrategyTwo(opponentsMove, gameOutcome);
             }
         }

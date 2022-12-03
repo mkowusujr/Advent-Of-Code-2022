@@ -6,4 +6,10 @@ public static class StringExtentionMethods
     {
         return (T)Enum.Parse(typeof(T), text);
     }
+
+    public static int ToPriority(this char item)
+    {
+        int asciiValue = (int)item;
+        return asciiValue < 91? asciiValue - 38 : asciiValue - 96;
+    }
 }

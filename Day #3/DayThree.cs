@@ -1,4 +1,5 @@
 namespace AdventOfCode2022.Solutions;
+using AdventOfCode2022.Utils.ExtentionMethods;
 
 public static class DayThree
 {
@@ -7,7 +8,7 @@ public static class DayThree
     public static void ExecuteSoultions(string challengeOption, string inputFileName)
     {
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
-        int totalGameScore;
+        // int totalGameScore;
 
         switch (challengeOption)
         {
@@ -16,11 +17,24 @@ public static class DayThree
                 // Console.WriteLine($"My total score would be {totalGameScore}");
                 break;
             default:
-                // totalGameScore = ParseInputFile(filePath, gameStrategy: 1);
-                // Console.WriteLine($"My total score would be {totalGameScore}");
+                int prioritySum = FindSumOfPrioriies(filePath);
+                Console.WriteLine($"The priority sum is {prioritySum}");
                 break;
         }
     }
 
-   
+    private static int FindSumOfPrioriies(string fileName)
+    {
+        int prioritySum = 0;
+
+        var inputFile = File.ReadLines(fileName);
+        foreach (var line in inputFile)
+        {
+            string compartment1 = string.Join("", line.Take(line.Length / 2));
+            string compartment2 = string.Join("", line.Skip(line.Length / 2));
+            List<char> itemsInCommon = compartment1.Intersect(compartment2).ToList();
+            prioritySum += itemsInCommon.Select(item => item.ToPriority()).Sum();
+        }
+        return prioritySum;
+    }
 }

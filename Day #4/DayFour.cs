@@ -23,28 +23,27 @@ public static class DayFour
             int[] assignments = line.Split(new Char[] { ',', '-' })
                 .Select(item => Int32.Parse(item))
                 .ToArray();
-
-            // if (gameStrategy == 1)
-            // {
+            
             if (
                 (gameStrategy == 1)
-                    && (assignments[0] >= assignments[2] && assignments[1] <= assignments[3])
-                || (assignments[2] >= assignments[0] && assignments[3] <= assignments[1])
+                && (
+                    (assignments[0] >= assignments[2] && assignments[1] <= assignments[3])
+                    || (assignments[2] >= assignments[0] && assignments[3] <= assignments[1])
+                )
             )
             {
                 numberOfPairs++;
             }
-            // }
-            else
-            {
-                if (
-                    (gameStrategy == 2)
-                        && (assignments[0] <= assignments[3] && assignments[1] >= assignments[2])
+            
+            if (
+                (gameStrategy == 2)
+                && (
+                    (assignments[0] <= assignments[3] && assignments[1] >= assignments[2])
                     || (assignments[2] >= assignments[0] && assignments[3] <= assignments[0])
                 )
-                {
-                    numberOfPairs++;
-                }
+            )
+            {
+                numberOfPairs++;
             }
         }
         return numberOfPairs;

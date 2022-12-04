@@ -8,7 +8,10 @@ public static class DayThree
     public static void ExecuteSoultions(string challengeOption, string inputFileName)
     {
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
-        int prioritySum = FindSumOfPrioriies(filePath, gameStrategy: challengeOption.Equals("s2") ? 2 : 1);
+        int prioritySum = FindSumOfPrioriies(
+            filePath,
+            gameStrategy: challengeOption.Equals("s2") ? 2 : 1
+        );
         Console.WriteLine($"The priority sum is {prioritySum}");
     }
 
@@ -18,7 +21,6 @@ public static class DayThree
 
         int lineRowNumber = 0;
         List<string> partition = new(3);
-
 
         var inputFile = File.ReadLines(fileName);
         foreach (var line in inputFile)
@@ -36,7 +38,10 @@ public static class DayThree
                 partition.Add(line);
                 if (lineRowNumber % 3 == 0)
                 {
-                    List<char> itemsInCommon = partition[0].Intersect(partition[1]).Intersect(partition[2]).ToList();
+                    List<char> itemsInCommon = partition[0]
+                        .Intersect(partition[1])
+                        .Intersect(partition[2])
+                        .ToList();
                     prioritySum += itemsInCommon.Select(item => item.ToPriority()).Sum();
                     partition.Clear();
                 }

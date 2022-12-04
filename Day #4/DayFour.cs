@@ -9,27 +9,44 @@ public static class DayFour
     {
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
 
-        int sum = ParseFile(filePath, gameStrategy: challengeOption.Equals("s2") ? 2 : 1);
-        Console.WriteLine($"The priority sum is {sum}");
+        int numberOfPairs = ParseFile(filePath, gameStrategy: challengeOption.Equals("s2") ? 2 : 1);
+        Console.WriteLine($"The number of pairs is {numberOfPairs}");
     }
 
     private static int ParseFile(string fileName, int gameStrategy)
     {
-        int sum = 0;
-
+        int numberOfPairs = 0;
 
         var inputFile = File.ReadLines(fileName);
         foreach (var line in inputFile)
         {
-            if (gameStrategy == 1)
+            int[] assignments = line.Split(new Char[] { ',', '-' })
+                .Select(item => Int32.Parse(item))
+                .ToArray();
+
+            // if (gameStrategy == 1)
+            // {
+            if (
+                (gameStrategy == 1)
+                    && (assignments[0] >= assignments[2] && assignments[1] <= assignments[3])
+                || (assignments[2] >= assignments[0] && assignments[3] <= assignments[1])
+            )
             {
-                
+                numberOfPairs++;
             }
+            // }
             else
             {
-                
+                if (
+                    (gameStrategy == 2)
+                        && (assignments[0] <= assignments[3] && assignments[1] >= assignments[2])
+                    || (assignments[2] >= assignments[0] && assignments[3] <= assignments[0])
+                )
+                {
+                    numberOfPairs++;
+                }
             }
         }
-        return sum;
+        return numberOfPairs;
     }
 }

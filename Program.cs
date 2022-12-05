@@ -46,6 +46,9 @@ internal class Program
             case "d5":
                 Solutions.DayFive.ExecuteSoultions(challengeOption, inputFileName);
                 break;
+            case "d6":
+                Solutions.DaySix.ExecuteSoultions(challengeOption, inputFileName);
+                break;
             default:
                 throw new ArgumentOutOfRangeException(
                     nameof(dayOption),

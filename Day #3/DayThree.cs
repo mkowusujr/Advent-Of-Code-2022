@@ -12,6 +12,7 @@ public static class DayThree
             filePath,
             gameStrategy: challengeOption.Equals("s2") ? 2 : 1
         );
+        
         Console.WriteLine($"The priority sum is {prioritySum}");
     }
 

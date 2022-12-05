@@ -7,8 +7,8 @@ public static class DayFour
     public static void ExecuteSoultions(string challengeOption, string inputFileName)
     {
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
-
         int numberOfPairs = ParseFile(filePath, gameStrategy: challengeOption.Equals("s2") ? 2 : 1);
+        
         Console.WriteLine($"The number of pairs is {numberOfPairs}");
     }
 

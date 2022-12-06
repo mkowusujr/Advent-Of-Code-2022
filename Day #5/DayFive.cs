@@ -9,7 +9,10 @@ public static class DayFive
     {
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
 
-        string cratesAtTheTopOfEachStack = ParseFile(filePath, gameStrategy: challengeOption.Equals("s2") ? 2 : 1);
+        string cratesAtTheTopOfEachStack = ParseFile(
+            filePath,
+            gameStrategy: challengeOption.Equals("s2") ? 2 : 1
+        );
         Console.WriteLine($"The crates at the top of each stack is {cratesAtTheTopOfEachStack}");
     }
 
@@ -21,12 +24,12 @@ public static class DayFive
         var inputFile = File.ReadLines(fileName).Reverse();
         foreach (var line in inputFile)
         {
-
-            if (
-                (!line.Equals("") && !line.StartsWith("m"))
-                && (!Char.IsDigit((char)line[1])))
+            if ((!line.Equals("") && !line.StartsWith("m")) && (!Char.IsDigit((char)line[1])))
             {
-                var initialClean = line.Replace("    ", "_").Replace(" ", "").Replace("[", "").Replace("]", "");
+                var initialClean = line.Replace("    ", "_")
+                    .Replace(" ", "")
+                    .Replace("[", "")
+                    .Replace("]", "");
                 Console.WriteLine(initialClean);
                 if (isFirstLine == true)
                 {
@@ -50,7 +53,6 @@ public static class DayFive
                     }
                 }
             }
-
         }
         return crates;
     }
@@ -64,16 +66,25 @@ public static class DayFive
         {
             if (line.StartsWith("m"))
             {
-                List<int> commands = line.Replace("move ", "").Replace(" from ", ",").Replace(" to ", ",").Split(',').Select(c => Int32.Parse(c)).ToList();
+                List<int> commands = line.Replace("move ", "")
+                    .Replace(" from ", ",")
+                    .Replace(" to ", ",")
+                    .Split(',')
+                    .Select(c => Int32.Parse(c))
+                    .ToList();
                 Console.WriteLine(string.Join(",", commands));
                 if (gameStrategy == 1)
                 {
                     for (var i = 0; i < commands[0]; i++)
                     {
                         char tempStorage = crates[commands[1]].Pop();
-                        Console.WriteLine($"popped {tempStorage} from crate {commands[1]} for the {i + 1} time");
+                        Console.WriteLine(
+                            $"popped {tempStorage} from crate {commands[1]} for the {i + 1} time"
+                        );
                         crates[commands[2]].Push(tempStorage);
-                        Console.WriteLine($"pushed {tempStorage} from crate {commands[2]} for the {i + 1} time");
+                        Console.WriteLine(
+                            $"pushed {tempStorage} from crate {commands[2]} for the {i + 1} time"
+                        );
                     }
                 }
                 else
@@ -82,13 +93,17 @@ public static class DayFive
                     for (var i = 0; i < commands[0]; i++)
                     {
                         tempStorage.Push(crates[commands[1]].Pop());
-                        Console.WriteLine($"popped {tempStorage} from crate {commands[1]} for the {i + 1} time");
+                        Console.WriteLine(
+                            $"popped {tempStorage} from crate {commands[1]} for the {i + 1} time"
+                        );
                     }
 
                     for (var i = 0; i < commands[0]; i++)
                     {
                         crates[commands[2]].Push(tempStorage.Pop());
-                        Console.WriteLine($"pushed {tempStorage} from crate {commands[2]} for the {i + 1} time");
+                        Console.WriteLine(
+                            $"pushed {tempStorage} from crate {commands[2]} for the {i + 1} time"
+                        );
                     }
                 }
             }

@@ -9,27 +9,30 @@ public static class DaySix
     {
         string filePath = Path.Combine(SolutionDirectory, inputFileName);
 
-        int sum = ParseFile(filePath, gameStrategy: challengeOption.Equals("s2") ? 2 : 1);
-        Console.WriteLine($"The priority sum is {sum}");
+        int firstMarkerCharacterAt = ParseFile(
+            filePath,
+            gameStrategy: challengeOption.Equals("s2") ? 2 : 1
+        );
+        Console.WriteLine(
+            $"The first marker after character {firstMarkerCharacterAt}"
+        );
     }
 
     private static int ParseFile(string fileName, int gameStrategy)
     {
-        int sum = 0;
+        int firstMarkerCharacterAt = 0;
 
+        string inputLine = File.ReadLines(fileName).First();
 
-        var inputFile = File.ReadLines(fileName);
-        foreach (var line in inputFile)
+        for (var i = 0; i < inputLine.Length - 4; i++)
         {
-            if (gameStrategy == 1)
+            string currentPacket = inputLine.Substring(startIndex: i, length: 4);
+            if (currentPacket.Distinct().ToList().Count == 4)
             {
-                
-            }
-            else
-            {
-                
+                firstMarkerCharacterAt = i + 4;
+                break;
             }
         }
-        return sum;
+        return firstMarkerCharacterAt;
     }
 }

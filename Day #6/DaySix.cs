@@ -13,26 +13,45 @@ public static class DaySix
             filePath,
             gameStrategy: challengeOption.Equals("s2") ? 2 : 1
         );
-        Console.WriteLine(
-            $"The first marker after character {firstMarkerCharacterAt}"
-        );
+        Console.WriteLine($"The first marker after character {firstMarkerCharacterAt}");
     }
 
     private static int ParseFile(string fileName, int gameStrategy)
     {
-        int firstMarkerCharacterAt = 0;
+        int characterAtMaker = 0;
 
         string inputLine = File.ReadLines(fileName).First();
-
-        for (var i = 0; i < inputLine.Length - 4; i++)
+        if (gameStrategy == 1)
         {
-            string currentPacket = inputLine.Substring(startIndex: i, length: 4);
-            if (currentPacket.Distinct().ToList().Count == 4)
+            int maxPacketLength = 4;
+
+            for (var i = 0; i < inputLine.Length - maxPacketLength; i++)
             {
-                firstMarkerCharacterAt = i + 4;
-                break;
+                string currentPacket = inputLine.Substring(startIndex: i, length: maxPacketLength);
+                if (currentPacket.Distinct().ToList().Count == maxPacketLength)
+                {
+                    characterAtMaker = i + maxPacketLength;
+                    break;
+                }
             }
         }
-        return firstMarkerCharacterAt;
+        else
+        {
+            int maxMessageMakerLength = 14;
+            for (var i = 0; i < inputLine.Length - maxMessageMakerLength; i++)
+            {
+                string currentPacket = inputLine.Substring(
+                    startIndex: i,
+                    length: maxMessageMakerLength
+                );
+                if (currentPacket.Distinct().ToList().Count == maxMessageMakerLength)
+                {
+                    characterAtMaker = i + maxMessageMakerLength;
+                    break;
+                }
+            }
+        }
+
+        return characterAtMaker;
     }
 }

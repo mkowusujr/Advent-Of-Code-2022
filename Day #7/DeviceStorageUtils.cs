@@ -16,10 +16,8 @@ public class DeviceStorageDirectory
 {
     public string DirectoryName { get; init; } = string.Empty;
     public DeviceStorageDirectory? ParentDirectory { get; init; }
-    public List<DeviceStorageDirectory> ChildrenDirectories { get; private set; } =
-        new List<DeviceStorageDirectory>();
-    public List<DeviceStorageFile> ChildrenFiles { get; private set; } =
-        new List<DeviceStorageFile>();
+    public List<DeviceStorageDirectory> ChildrenDirectories { get; private set; } = new();
+    public List<DeviceStorageFile> ChildrenFiles { get; private set; } = new();
 
     public void AddChildrenFile(DeviceStorageFile file)
     {

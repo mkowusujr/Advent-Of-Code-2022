@@ -64,6 +64,27 @@ public class DeviceStorageDirectory
         return sum;
     }
 
+    public List<DeviceStorageDirectory> GetCanidatesForDeletion(int sizeRequirement)
+    {
+        List<DeviceStorageDirectory> canidatesForDeletion = new();
+        if (GetDirectorySize() > sizeRequirement)
+        {
+            canidatesForDeletion.Add(this);
+        }
+
+        foreach (var childDirectory in ChildrenDirectories)
+        {
+            if (childDirectory.GetDirectorySize() > sizeRequirement)
+            {
+                canidatesForDeletion.Add(childDirectory);
+            }
+
+            canidatesForDeletion.AddRange(childDirectory.GetCanidatesForDeletion(sizeRequirement));
+        }
+
+        return canidatesForDeletion;
+    }
+
     public override string ToString()
     {
         return ToString(directoryLevelDown: 1);
